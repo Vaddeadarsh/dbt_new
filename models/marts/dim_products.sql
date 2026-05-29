@@ -1,0 +1,1 @@
+select distinct product_id, product_name, product_category, unit_price_usd, weight_kg from {{ ref('stg_products') }}

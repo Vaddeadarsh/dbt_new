@@ -1,0 +1,1 @@
+select inventory_id, warehouse_id, product_id, inventory_stock_qty, safety_stock_threshold, stock_health_status from {{ ref('int_inventory_stock_alerts') }}

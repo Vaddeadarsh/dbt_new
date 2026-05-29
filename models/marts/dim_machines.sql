@@ -1,0 +1,1 @@
+select machine_id, machine_type, machine_status, total_jobs_assigned, total_units_processed, running_efficiency_score, operational_utilization_tier, last_maintenance_at from {{ ref('int_machine_utilization_downtime') }}
