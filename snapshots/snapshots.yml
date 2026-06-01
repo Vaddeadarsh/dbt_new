@@ -1,0 +1,38 @@
+version: 2
+
+snapshots:
+  - name: sns_supplier_info_1
+    relation: ref('stg_suppliers')
+    config:
+      database: manufacturing360
+      schema: snapshots
+      strategy: timestamp
+      unique_key: '"supplier_id"'
+      updated_at: '"profile_updated_ts"::timestamp_tz'
+      dbt_valid_to_current: "to_date('9999-12-31')"
+      hard_deletes: new_record
+      
+      snapshot_meta_column_names:
+        dbt_valid_from: start_date
+        dbt_valid_to: expiry_date
+        dbt_scd_id: "suppliers"
+        dbt_updated_at: updated_at
+        dbt_is_deleted: is_deleted
+
+  - name: sns_product_specifications_1
+    relation: ref('stg_products')
+    config:
+      database: manufacturing360
+      schema: snapshots
+      strategy: check
+      unique_key: product_id
+      check_cols: ['unit_price_usd', 'weight_kg']
+      dbt_valid_to_current: "to_date('9999-12-31')"
+      hard_deletes: new_record
+      snapshot_meta_column_names:
+        dbt_valid_from: start_date
+        dbt_valid_to: expiry_date
+        dbt_scd_id: "products"
+        dbt_updated_at: updated_at
+        dbt_is_deleted: is_deleted
+    

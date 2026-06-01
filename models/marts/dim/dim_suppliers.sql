@@ -1,0 +1,1 @@
+select distinct "supplier_id" AS supplier_id , "supplier_name" AS supplier_name, "country" AS country, "contact_email" AS contact_email  from {{ ref('stg_suppliers') }}
